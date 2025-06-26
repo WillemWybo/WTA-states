@@ -1,5 +1,20 @@
 # WTA-states
-Exercises combining brain states and soft winner takes all
+Simple network architecture combining brain states and soft winner takes all
+
+## Reproduce paper figure
+To reproduce the figure from the paper, follow these steps:
+
+1. Clone the repository \url{https://jugit.fz-juelich.de/w.wybo/ca-adex}, and follow the instructions provided therein to install the NESTML Ca-AdEx models
+2. Run `python WTA_figure.py`. To select the two-compartment neuron model, in the `tune_general_config.yaml` file, set:
+    ```yaml
+    use_single_compartment_environment: False
+    exc_neu_params_filename: "Ca-AdEx_neural_params.yaml"
+    ```
+    For the point neuron model, set
+    ```yaml
+    use_single_compartment_environment: True 
+    exc_neu_params_filename: "standard_AdEx_exc_neural_params.yaml"
+    ```
 
 # Acknowledgemt of fundings
 This work has been cofunded by the European Next Generation EU grants Italian MUR CUP I53C22001400006 (FAIR PE0000013 PNRR Project).
