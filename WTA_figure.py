@@ -14,8 +14,7 @@ from synaptic_io import *
 from synaptic_analysis import *
 
 
-from datarep.matplotlibsettings import *
-from datarep import paths
+from matplotlibsettings import *
 
 
 pop_colours = [
@@ -399,9 +398,9 @@ def plot_figure():
     sim_and_plot_WTA_awake(axes=[ax0, ax1, ax2])
 
     if multi_comp:
-        pl.savefig(paths.fig_path + 'NESTMLpaper_WTA_multi_comp.svg', transparent=True)
+        pl.savefig('NESTMLpaper_WTA_multi_comp.svg', transparent=True)
     else:
-        pl.savefig(paths.fig_path + 'NESTMLpaper_WTA_single_comp.svg', transparent=True)
+        pl.savefig('NESTMLpaper_WTA_single_comp.svg', transparent=True)
 
 
 if __name__ == "__main__":
