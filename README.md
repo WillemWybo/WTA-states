@@ -17,7 +17,7 @@ To reproduce the figure from the paper, follow these steps:
     ```
 
 # Acknowledgemt of fundings
-This work has been cofunded by the European Next Generation EU grants Italian MUR CUP I53C22001400006 (FAIR PE0000013 PNRR Project).
+This work has been cofunded by the European Next Generation EU grants Italian MUR CUP I53C22001400006 (FAIR PE0000013 PNRR Project) and the Helmholtz Association's project-oriented funding programme (PoF 2, Topic 3).
 
 # TRY ON EBRAINS
 
@@ -27,6 +27,8 @@ This work has been cofunded by the European Next Generation EU grants Italian MU
 see file AA-UserGuide.md
 
 # LOG OF MAIN EVENTS (from recent to past)
+2025-06-28 add and tune nestml multicompartment models 
+
 2024-1113 added a preliminary draft of User Guide
 2024-1113-plastic-on-off release
 - (better provenance tracking) solved issue #57 by copying neural parameters yaml in output dirs
