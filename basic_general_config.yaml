@@ -32,6 +32,7 @@ network:
     weight: 0.01
     Wmax: 'from-static_synaptic_default_value'
     delay: 'from-exc_to_exc_delay_ms'
+
 contextual_poisson:
   awake:
     basic_rate: 3000.0
@@ -82,6 +83,7 @@ contextual_poisson:
     - start_time_ms: 44000.0
       stop_time_ms: 44000.0
       target_population: 0
+
 poisson:
   awake:
     poisson_basic_rate: 600     #480.0
@@ -93,6 +95,14 @@ poisson:
     poisson_delta: 0.0
     poisson_noise_spreading_factor: 4.0
     poisson_weight: 0.6
+
+# inhibitory_poisson:
+#   awake:
+#     poisson_basic_rate: 600     #480.0
+#     poisson_delta: 0.0
+#     poisson_noise_spreading_factor: 4.0
+#     poisson_weight: 0.6
+
 
 weights:
   awake:

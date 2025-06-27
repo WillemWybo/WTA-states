@@ -7,8 +7,8 @@ inh_neu_params_filename: "standard_AdEx_inh_neural_params.yaml"
 use_single_compartment_environment: True
 exc_neu_params_filename: "standard_AdEx_exc_neural_params.yaml" 
 ## uncomment for two-compartment
-use_single_compartment_environment: False
-exc_neu_params_filename: "Ca-AdEx_neural_params.yaml"
+# use_single_compartment_environment: False
+# exc_neu_params_filename: "Ca-AdEx_neural_params.yaml"
 
 network:
   use_exc_recurrency: True
@@ -25,19 +25,11 @@ cf: 1.0
 weights:
   awake:
     #recurrent_weight: 0.0
-    recurrent_weight: 10.5 #9.5
-
-    #inh_to_exc_weight: -0.85
-    #inh_to_exc_weight: 0.0
-
-    #exc_to_inh_weight: 7.0
-    #exc_to_inh_weight: 0.0
-
-    #inh_to_inh_weight: -1.0 
-    #inh_to_inh_weight: 0.0
-
-    #inter_pop_weight: 0.01
-    inter_pop_weight: 0.0
+    recurrent_weight: 12. # 10.5 # 10.5 #9.5
+    inh_to_exc_weight: -1.5 #-0.85
+    exc_to_inh_weight: 7.0
+    inh_to_inh_weight: -1.0 
+    inter_pop_weight: 0.0   
 
   NREM:
     recurrent_weight: 19.0
@@ -51,13 +43,19 @@ weights:
 
 contextual_poisson:
   awake:
-    basic_rate: 3000.0 #4000.0
-    poisson_weight: 1.
+    basic_rate: 3000.0 # 3000
+    poisson_weight:  3.6 # 3.5 #1.
     spreading_factor: 4.0
     events:
     - start_time_ms: 5000.0
       stop_time_ms: 5025.0
       target_population: 0
+    # - start_time_ms: 5800.0
+    #   stop_time_ms: 5825.0
+    #   target_population: 0
+    # - start_time_ms: 6600.0
+    #   stop_time_ms: 6625.0
+    #   target_population: 0
     - start_time_ms: 5100.0
       stop_time_ms: 5125.0
       target_population: 1
@@ -82,13 +80,27 @@ contextual_poisson:
       stop_time_ms: 17000.0
       target_population: 0
 
+
+contextual_inhibition:
+  awake:
+    basic_rate: 1000.0 #4000.0
+    poisson_weight: 2.0 #1.
+    spreading_factor: 4.0
+    events:
+    - start_time_ms: 4800
+      stop_time_ms: 4990.0
+      target_population: 0
+    - start_time_ms: 4900
+      stop_time_ms: 5090.0
+      target_population: 1
+
 poisson:
   awake:
     poisson_noise_spreading_factor: 4.0
-    poisson_basic_rate: 600.0
+    poisson_basic_rate: 600 # 600.0
     #poisson_basic_rate: 600.0
     poisson_delta: 0.0
-    poisson_weight: 0.6
+    poisson_weight: 1.0 # 1.2 # 1.5 #0.6
   NREM:
     poisson_noise_spreading_factor: 4.0
     #for standard adex poisson basic rate 600

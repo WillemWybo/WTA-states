@@ -44,14 +44,14 @@ def init_Ca_AdEx_nestml(default_params, multi_comp=False):
             'v_thr': default_params['e_Na_Adex'],         # [mV] Adex threshold
             'delta_thr': default_params['delta_T'],              # [mV] Adex slope factor
             # 'd_BAP': default_params['d_BAP'],             # delay not yet implemented
-            'refr_period': default_params['t_ref'],
+            'refr_period': default_params['t_ref'] + 0.2,
             'v_reset': default_params['V_reset'],
             'tau_w': default_params['tau_w'],
             'sth_a': default_params['a'],
             'b': default_params['b'],
             'e_adapt': default_params['e_L_s'],
             'g_adapt': default_params['g_w'],
-            # 'g_refr': 100000.,
+            'g_refr': 1e6,
         }
 
         distal_params = {
@@ -60,7 +60,7 @@ def init_Ca_AdEx_nestml(default_params, multi_comp=False):
             'g_C': default_params['g_C_d'],                 # [nS] Soma-distal coupling conductance
             'e_L': default_params['e_L_d'],                 # [mV] Distal reversal potential
             'gbar_Ca': default_params['gbar_Ca'],           # [nS] Ca maximal conductance
-            'gbar_K': default_params['gbar_K_Ca']*2,       # [nS] K_Ca maximal conductance
+            'gbar_K': default_params['gbar_K_Ca'],       # [nS] K_Ca maximal conductance
             'e_K': default_params['e_K'],                   # [mV] K reversal potential
             'tau_Ca': default_params['tau_decay_Ca'], # [ms] decay of Ca concentration
             'phi_Ca': default_params['phi'],                   # [-] scale factor
@@ -90,7 +90,7 @@ def init_Ca_AdEx_nestml(default_params, multi_comp=False):
             # 'v_thr': default_params['V_peak'],         # [mV] Adex threshold
             'delta_thr': default_params['Delta_T'],              # [mV] Adex slope factor
             # 'd_BAP': default_params['d_BAP'],             # delay not yet implemented
-            'g_refr': 100000.,
+            'g_refr': 1e6,
             'refr_period': default_params['t_ref'] + 0.2,
             'v_reset': default_params['V_reset'],
             'tau_w': default_params['tau_w'],
@@ -98,6 +98,7 @@ def init_Ca_AdEx_nestml(default_params, multi_comp=False):
             'b': default_params['b'],
             'e_adapt': default_params['E_L'],
             'g_adapt': 1., # educated guess
+            'g_refr': 1e6,
         }
         distal_params = None
         other_params = {'V_th': default_params['V_peak']}

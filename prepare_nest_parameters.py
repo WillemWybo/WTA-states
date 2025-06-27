@@ -210,6 +210,9 @@ def nest_parameters_preparation(times, config, is_verbose, nest_pms):
     # Add contextual poisson signal configuration to nest_pms
     if 'contextual_poisson' in config:
         nest_pms['contextual_poisson'] = config['contextual_poisson']
+    # Add contextual inhibiton signal configuration to nest_pms
+    if 'contextual_inhibition' in config:
+        nest_pms['contextual_inhibition'] = config['contextual_inhibition']
     nest_pms["brain_state"]= brain_state
     nest_pms["sim_pms"]=times["sim_pms"]
     nest_pms["use_nestml"]= use_nestml

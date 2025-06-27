@@ -3,11 +3,11 @@ neuron_kind: "excitatory"
 equation_params:
     a: 0
     b_awake: 40.0
-    t_ref: 0.0
+    t_ref: 3.0
     Delta_T: 2.0
-    C_m: 200.0
-    g_L: 10.0
-    E_L_awake: -63.0
+    C_m: 250. # 200.0
+    g_L: 17.649135192375574 # 12.6 # 12.658227848101266 # 10. # 
+    E_L_awake: -66 #-66.0 #-63.0
     V_reset_awake: -65.0
     tau_w: 500.0
     V_th: -50.0

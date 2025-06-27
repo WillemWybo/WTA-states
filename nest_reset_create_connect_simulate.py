@@ -15,6 +15,7 @@ def nest_reset_create_connect_simulate(nest_pms, num_threads, verbose):
     sim_pms=nest_pms["sim_pms"]
     use_nestml=nest_pms["use_nestml"]
     nest.ResetKernel()
+    nest.local_num_threads = 4
     if use_nestml: 
         nest.Install("ca_adex_2expsyn_module")
 
@@ -234,7 +235,7 @@ def nest_reset_create_connect_simulate(nest_pms, num_threads, verbose):
     if use_poisson_generators:
         num_poisson_generators=nest_pms["network"]["num_poisson_generators"]
         poisson_rate=nest_pms["poisson"]["poisson_rate"]
-        pgs = nest.Create("poisson_generator", num_poisson_generators, params={"rate": poisson_rate})
+        pgs = nest.Create("poisson_generator", num_poisson_generators, params={"rate": poisson_rate, 'start': 400.})
         poisson_weight=nest_pms["poisson"]["poisson_weight"]
         
         syn_spec={"weight": poisson_weight, "delay": 1.0}
@@ -280,13 +281,54 @@ def nest_reset_create_connect_simulate(nest_pms, num_threads, verbose):
                         syn_spec.update({'receptor_type': AMPA_NMDA_dist})
                 else:
                     # if use_single_compartment_environment:    
-                    #     syn_spec.update({'receptor_type': ri.ALPHAexc_soma})
+                    #     syn_spec.update({'receptor_type': ri.AMPA_NMDA_soma})
                     # else:    
                     #     syn_spec.update({'receptor_type': ri.AMPA_NMDA_dist})
                     syn_spec.update({'receptor_type': ri.PSC_context})
 
                 nest.Connect(contextual_poisson_gen, neurons[target_pop], syn_spec=syn_spec)
 
+    # Add contextual inhibiton signal if configured
+    if 'contextual_inhibition' in nest_pms and \
+            nest_pms['brain_state'] in nest_pms['contextual_inhibition']: 
+        # Extract the upper-level configuration parameters
+        contextual_poisson_config = nest_pms['contextual_inhibition'][nest_pms['brain_state']]
+        
+        # Ensure all required keys are present in the configuration
+        if all(key in contextual_poisson_config for key in ['events', 'spreading_factor', 'basic_rate', 'poisson_weight']):
+            events = contextual_poisson_config['events']
+            spreading_factor = contextual_poisson_config['spreading_factor']
+            basic_rate = contextual_poisson_config['basic_rate']
+            poisson_weight = contextual_poisson_config['poisson_weight']
+    
+            # Iterate through each event in the events list
+            for event in events:
+                target_pop = event['target_population']
+                start_time = event['start_time_ms']
+                stop_time = event['stop_time_ms']
+                
+                # Create a Poisson generator for the event
+                contextual_poisson_gen = nest.Create('poisson_generator', 1, {'rate': basic_rate})
+                
+                # Set the start and stop times for the generator
+                nest.SetStatus(contextual_poisson_gen, {'start': start_time, 'stop': stop_time})
+    
+                # Define the synapse specifications
+                syn_spec = {'weight': poisson_weight * spreading_factor, "delay": 1.0}
+    
+                # Connect the generator to the target population
+                if not use_nestml:
+                    if not use_single_compartment_environment:             
+                        syn_spec.update({'receptor_type': AMPA_NMDA_dist})
+                else:
+                    # @Willem, please modify the code in the comment towards your nestml specifics 
+                    # assert False, "use_nestml option not yet supported: under construction"
+                    if  use_single_compartment_environment:    
+                        syn_spec.update({'receptor_type': ri.ALPHAinh_soma})
+                    else:    
+                        syn_spec.update({'receptor_type': ri.ALPHAinh_dist})
+
+                nest.Connect(contextual_poisson_gen, neurons[target_pop], syn_spec=syn_spec)
 
     # DC current injection for all neurons if enabled
     use_dc_exc_injectors=nest_pms["use_dc_exc_injectors"]

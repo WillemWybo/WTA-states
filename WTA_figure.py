@@ -106,6 +106,7 @@ def plot_traces(ax_traces, multimeter, cropped_events, crop_pms, nest_pms, xlim=
     if not nest_pms["use_single_compartment_environment"]:
         ax_traces.plot(events["times"], events["v_comp1"], c=colours[1], lw=lwidth, label=r"$v_{dend}$")
 
+    ax_traces.set_ylim((-100, 100))
     ylim = ax_traces.get_ylim()
     rect = mpatches.Rectangle((5000, ylim[0]), 
         100,
@@ -342,7 +343,7 @@ def sim_and_plot_WTA_awake(axes=None):
     cropped_inh_events = crop_inh_events(crop_pms, inh_spike_recorder)
 
 
-    plot_traces(ax_traces, multimeters, cropped_events, crop_pms, nest_pms)
+    plot_traces(ax_traces, multimeters, cropped_events, crop_pms, nest_pms, xlim=(4700, 5500))
 
     is_verbose = False
     # launches all analysis
