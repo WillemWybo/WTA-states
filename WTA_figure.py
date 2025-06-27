@@ -106,7 +106,7 @@ def plot_traces(ax_traces, multimeter, cropped_events, crop_pms, nest_pms, xlim=
     if not nest_pms["use_single_compartment_environment"]:
         ax_traces.plot(events["times"], events["v_comp1"], c=colours[1], lw=lwidth, label=r"$v_{dend}$")
 
-    ax_traces.set_ylim((-100, 100))
+    ax_traces.set_ylim((-90, 30))
     ylim = ax_traces.get_ylim()
     rect = mpatches.Rectangle((5000, ylim[0]), 
         100,
@@ -256,7 +256,7 @@ def plot_weight_evolution(ax_weight, list_of_syn_matrix_file_names, crop_pms):
             ax_weight.axvline(3000, c='lightgrey', lw=lwidth*1.5, zorder=-101)
 
     ax_weight.set_xlim(crop_pms["start_ms"]-50., crop_pms["stop_ms"]+100.)
-    ax_weight.set_ylim(-.2, 11.)
+    ax_weight.set_ylim(-.2, 14.)
     ax_weight.set_xlabel(r"$t$ [ms]", fontsize=ticksize)
     ax_weight.set_ylabel(r"$w_{exc}$ [nS]", fontsize=ticksize)
     ax_weight.legend(loc="center left", fontsize=ticksize)
@@ -343,7 +343,7 @@ def sim_and_plot_WTA_awake(axes=None):
     cropped_inh_events = crop_inh_events(crop_pms, inh_spike_recorder)
 
 
-    plot_traces(ax_traces, multimeters, cropped_events, crop_pms, nest_pms, xlim=(4700, 5500))
+    plot_traces(ax_traces, multimeters, cropped_events, crop_pms, nest_pms, xlim=(4950, 5250))
 
     is_verbose = False
     # launches all analysis
@@ -367,9 +367,10 @@ def sim_and_plot_WTA_awake(axes=None):
 
     plot_weight_evolution(ax_weight, list_of_syn_matrix_file_names, crop_pms)
 
+    return nest_pms
+
 
 def plot_figure():
-    multi_comp = False
 
     pl.figure("WTA_network", figsize=(7,10))
 
@@ -387,6 +388,9 @@ def plot_figure():
     ax1 = myAx(pl.subplot(gs1[0:4,0]))
     ax2 = myAx(pl.subplot(gs1[4:7,0]))
 
+    nest_pms = sim_and_plot_WTA_awake(axes=[ax0, ax1, ax2])
+    multi_comp = not(nest_pms["use_single_compartment_environment"])
+
     if multi_comp:
         ax0.add_artist(plabels[0])
         ax1.add_artist(plabels[1])
@@ -395,8 +399,6 @@ def plot_figure():
         ax0.add_artist(plabels[3])
         ax1.add_artist(plabels[6])
         ax2.add_artist(plabels[7])
-
-    sim_and_plot_WTA_awake(axes=[ax0, ax1, ax2])
 
     if multi_comp:
         pl.savefig('NESTMLpaper_WTA_multi_comp.svg', transparent=True)

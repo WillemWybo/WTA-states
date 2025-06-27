@@ -29,7 +29,7 @@ def nest_reset_create_connect_simulate(nest_pms, num_threads, verbose):
     p_conn_inh = nest_pms["network"]["p_conn_exc"]
     default_plasticity = nest_pms["network"]["default_plasticity"]
 
-    use_single_compartment_environment=nest_pms["use_single_compartment_environment"]
+    use_single_compartment_environment = nest_pms["use_single_compartment_environment"]
     
     print("IN nest_reset_create_connect_simulate: use_single_compartment_environment =", use_single_compartment_environment)
     print("IN nest_reset_create_connect_simulate: use_nestml =", use_nestml)
@@ -174,7 +174,7 @@ def nest_reset_create_connect_simulate(nest_pms, num_threads, verbose):
                 if i != j:
                     static_synapse_i_j='static_synapse_'+str(i)+'_'+str(j)
                     nest.CopyModel('static_synapse',static_synapse_i_j)
-                    syn_spec={"synapse_model":static_synapse_i_j,"weight": inter_pop_weight, "delay": exc_to_exc_delay_ms}
+                    syn_spec={"synapse_model":static_synapse_i_j,"weight": inter_pop_weight * cf_mc, "delay": exc_to_exc_delay_ms}
                     if not use_nestml:
                         if(not use_single_compartment_environment):
                             syn_spec.update({'receptor_type': ALPHAexc_soma})
@@ -235,7 +235,7 @@ def nest_reset_create_connect_simulate(nest_pms, num_threads, verbose):
     if use_poisson_generators:
         num_poisson_generators=nest_pms["network"]["num_poisson_generators"]
         poisson_rate=nest_pms["poisson"]["poisson_rate"]
-        pgs = nest.Create("poisson_generator", num_poisson_generators, params={"rate": poisson_rate, 'start': 400.})
+        pgs = nest.Create("poisson_generator", num_poisson_generators, params={"rate": poisson_rate, 'start': 200.})
         poisson_weight=nest_pms["poisson"]["poisson_weight"]
         
         syn_spec={"weight": poisson_weight, "delay": 1.0}

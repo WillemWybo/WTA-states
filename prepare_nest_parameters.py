@@ -13,6 +13,7 @@ def nest_parameters_preparation(times, config, is_verbose, nest_pms):
     exc_pms_file_name = config['exc_neu_params_filename']
     inh_pms_file_name = config['inh_neu_params_filename']
     network = config['network']
+    # multi comp weight conversion
     if use_single_compartment_environment:
         cf = 1
     else:
@@ -83,12 +84,12 @@ def nest_parameters_preparation(times, config, is_verbose, nest_pms):
         network['default_plasticity']={}
         network['default_plasticity']['synapse_model'] = 'stdp_synapse'
         network['default_plasticity']['tau_plus'] = 20   
-        network['default_plasticity']['lambda'] = 0.1   
+        network['default_plasticity']['lambda'] = 0.1  
         network['default_plasticity']['alpha'] = 1.2
         network['default_plasticity']['mu_plus'] = 1.0   
         network['default_plasticity']['mu_minus'] = 1.0 
         network['default_plasticity']['weight'] = 0.01      
-        network['default_plasticity']['Wmax'] = recurrent_weight  
+        network['default_plasticity']['Wmax'] = recurrent_weight * 2
         network['default_plasticity']['delay'] = 'from-exc_to_exc_delay_ms'  
     
     use_poisson_generators = network["use_poisson_generators"]
