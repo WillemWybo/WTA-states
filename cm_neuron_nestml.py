@@ -30,7 +30,8 @@ class ReceptorIdxs:
     ALPHAinh_dist: int = 12
     NMDA_dist: int = 13
     AMPA_NMDA_dist: int = 14
-    I_soma: int = 15
+    PSC_context: int = 15
+    I_soma: int = 16
     
 
 def init_Ca_AdEx_nestml(default_params, multi_comp=False):
@@ -116,7 +117,8 @@ def create_receptor_mapping(multi_comp=True):
             ALPHAexc_dist=2, 
             ALPHAinh_dist=3, 
             AMPA_NMDA_dist=4, 
-            I_soma=5,
+            PSC_context=5, 
+            I_soma=6,
             # other receptors types are not used, assign something that will generate an error when used
             GABA_soma=float('nan'), 
             AMPA_soma=float('nan'), 
@@ -136,8 +138,9 @@ def create_receptor_mapping(multi_comp=True):
             # are added. For clearer bookkeeping, we explicitly define these indices here.
             ALPHAexc_soma=0, 
             ALPHAinh_soma=1, 
-            AMPA_NMDA_soma=2, 
-            I_soma=3,
+            AMPA_NMDA_soma=2,
+            PSC_context=3, 
+            I_soma=4,
             # other receptors types are not used, assign something that will generate an error when used
             GABA_soma=float('nan'), 
             AMPA_soma=float('nan'), 
@@ -175,6 +178,7 @@ def create_nestml_neuron(n = 1, params = {}, multi_comp = True, neuron_model="ca
             {"comp_idx": 1, "receptor_type": "syn_2exp", "params": {"tau_r_syn": .173, "tau_d_syn": .227, "e_syn": 0.}}, # ALPHAexc_dist
             {"comp_idx": 1, "receptor_type": "syn_2exp", "params": {"tau_r_syn": 1.73, "tau_d_syn": 2.27, "e_syn": -85.}}, # ALPHAinh_dist
             {"comp_idx": 1, "receptor_type": "ampa_nmda"}, # AMPA_NMDA_dist
+            {'comp_idx': 1, "receptor_type": "syn_psc", "params": {"tau_r_syn": 0.173, "tau_d_syn": 10.}},
             {"comp_idx": 0, "receptor_type": "inp"}, # I_SOMA
         ]
         cm.receptors = receptors
@@ -188,6 +192,7 @@ def create_nestml_neuron(n = 1, params = {}, multi_comp = True, neuron_model="ca
             {"comp_idx": 0, "receptor_type": "syn_2exp", "params": {"tau_r_syn": .173, "tau_d_syn": .227, "e_syn": 0.}}, # ALPHAexc_soma
             {"comp_idx": 0, "receptor_type": "syn_2exp", "params": {"tau_r_syn": 1.73, "tau_d_syn": 2.27, "e_syn": -85.}}, # ALPHAinh_soma
             {"comp_idx": 0, "receptor_type": "ampa_nmda"}, # AMPA_NMDA_soma
+            {'comp_idx': 0, "receptor_type": "syn_psc", "params": {"tau_r_syn": 0.173, "tau_d_syn": 10.}},
             {"comp_idx": 0, "receptor_type": "inp"}, # I_SOMA
         ]
         cm.receptors = receptors

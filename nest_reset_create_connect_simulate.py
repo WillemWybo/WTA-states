@@ -279,10 +279,11 @@ def nest_reset_create_connect_simulate(nest_pms, num_threads, verbose):
                     if not use_single_compartment_environment:             
                         syn_spec.update({'receptor_type': AMPA_NMDA_dist})
                 else:
-                    if use_single_compartment_environment:    
-                        syn_spec.update({'receptor_type': ri.ALPHAexc_soma})
-                    else:    
-                        syn_spec.update({'receptor_type': ri.AMPA_NMDA_dist})
+                    # if use_single_compartment_environment:    
+                    #     syn_spec.update({'receptor_type': ri.ALPHAexc_soma})
+                    # else:    
+                    #     syn_spec.update({'receptor_type': ri.AMPA_NMDA_dist})
+                    syn_spec.update({'receptor_type': ri.PSC_context})
 
                 nest.Connect(contextual_poisson_gen, neurons[target_pop], syn_spec=syn_spec)
 
