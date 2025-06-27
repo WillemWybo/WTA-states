@@ -44,7 +44,7 @@ def init_Ca_AdEx_nestml(default_params, multi_comp=False):
             'v_thr': default_params['e_Na_Adex'],         # [mV] Adex threshold
             'delta_thr': default_params['delta_T'],              # [mV] Adex slope factor
             # 'd_BAP': default_params['d_BAP'],             # delay not yet implemented
-            'refr_period': default_params['t_ref'] + 0.2,
+            'refr_period': default_params['t_ref'],
             'v_reset': default_params['V_reset'],
             'tau_w': default_params['tau_w'],
             'sth_a': default_params['a'],
@@ -91,7 +91,7 @@ def init_Ca_AdEx_nestml(default_params, multi_comp=False):
             'delta_thr': default_params['Delta_T'],              # [mV] Adex slope factor
             # 'd_BAP': default_params['d_BAP'],             # delay not yet implemented
             'g_refr': 1e6,
-            'refr_period': default_params['t_ref'] + 0.2,
+            'refr_period': default_params['t_ref'],
             'v_reset': default_params['V_reset'],
             'tau_w': default_params['tau_w'],
             'sth_a': default_params['a'],

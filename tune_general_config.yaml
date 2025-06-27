@@ -5,11 +5,11 @@ inh_neu_params_filename: "standard_AdEx_inh_neural_params.yaml"
 use_single_compartment_environment: True
 exc_neu_params_filename: "standard_AdEx_exc_neural_params.yaml" 
 ## uncomment for two-compartment
-use_single_compartment_environment: False
-exc_neu_params_filename: "Ca-AdEx_neural_params.yaml"
+# use_single_compartment_environment: False
+# exc_neu_params_filename: "Ca-AdEx_neural_params.yaml"
 
 # conversion factor for synaptic conductances in multi comp network
-cf: 1.15
+cf: 1.1
 
 weights:
   awake:
@@ -28,8 +28,8 @@ contextual_poisson:
     - start_time_ms: 5000.0
       stop_time_ms: 5025.0
       target_population: 0
-    - start_time_ms: 5100.0
-      stop_time_ms: 5125.0
+    - start_time_ms: 5125.0
+      stop_time_ms: 5150.0
       target_population: 1
 
 contextual_inhibition:
@@ -42,7 +42,7 @@ contextual_inhibition:
       stop_time_ms: 4990.0
       target_population: 0
     - start_time_ms: 4900
-      stop_time_ms: 5090.0
+      stop_time_ms: 5115.0
       target_population: 1
 
 poisson:

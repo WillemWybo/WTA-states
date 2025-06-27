@@ -24,7 +24,7 @@ equation_params:
     m_half: -9.0
     m_slope: 0.5
     phi: 1.571323940913652e-08
-    t_ref: 0.3
+    t_ref: 3.0
     tau_decay_Ca: 103.57233790866408
     tau_h: 80.0
     tau_m: 15.0
