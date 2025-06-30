@@ -4,7 +4,7 @@ Simple network architecture combining brain states and soft winner takes all
 ## Reproduce paper figure
 To reproduce the figure from the paper, follow these steps:
 
-1. Clone the repository \url{https://jugit.fz-juelich.de/w.wybo/ca-adex}, and follow the instructions provided therein to install the NESTML Ca-AdEx models
+1. Clone the repository [https://jugit.fz-juelich.de/w.wybo/ca-adex](https://jugit.fz-juelich.de/w.wybo/ca-adex), and follow the instructions provided therein to install the NESTML Ca-AdEx models
 2. Run `python WTA_figure.py`. To select the two-compartment neuron model, in the `tune_general_config.yaml` file, set:
     ```yaml
     use_single_compartment_environment: False

@@ -2,11 +2,11 @@ brain_state: "awake"
 use_nestml: True
 inh_neu_params_filename: "standard_AdEx_inh_neural_params.yaml"
 ## uncomment for single compartment
-use_single_compartment_environment: True
-exc_neu_params_filename: "standard_AdEx_exc_neural_params.yaml" 
+# use_single_compartment_environment: True
+# exc_neu_params_filename: "standard_AdEx_exc_neural_params.yaml" 
 ## uncomment for two-compartment
-# use_single_compartment_environment: False
-# exc_neu_params_filename: "Ca-AdEx_neural_params.yaml"
+use_single_compartment_environment: False
+exc_neu_params_filename: "Ca-AdEx_neural_params.yaml"
 
 # conversion factor for synaptic conductances in multi comp network
 cf: 1.1
